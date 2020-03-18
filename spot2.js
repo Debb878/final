@@ -1,36 +1,61 @@
 
 var cloud;
+var sun;
+
+let x = 1;
+let y = 1;
+let easing = 0.05;
+
+var maxCircleSize = 50
+var phase = 0, speed = 0.03;
+
+
 
 function preload(){
-  img = loadImage('images/cloud.png');
+  cloud= loadImage('images/cloud.png');
+  sun= loadImage('images/sun.png');
 }
 
-var spot = {
-  x: 100,
-  y: 50,
-};
+let spotx = 10; 
+let spoty = 50;
 
-var col = {
-  r: 255,
-  g: 50,
-  b: 45,
-};
+
+
 function setup() {
   createCanvas(600, 400);
   background(0);
-
-
+  noCursor();
+ 
 }
 
 function draw() {
-  col.r = random(100, 255);
-  col.g = random(100,55);
-  col.b = random(100, 190);
 
-  spot.x = random(0, width);
-  spot.y = random(height);
-  // noStroke();
-  // fill(col.r, col.g, col.b, 100);
-  image(cloud, spot.x, spot.y);
-  // ellipse(spot.x, spot.y, 24, 24);
+ // background(0);
+
+
+  spotx = (0, width);
+  spoty = random(height);
+  
+  imageMode(CENTER);
+  image(cloud, x, spoty, 40,40);
+  
+push();
+
+  let targetX = mouseX;
+  let dx = targetX - x;
+  x += dx * easing;
+
+  let targetY = mouseY;
+  let dy = targetY - y;
+  y += dy * easing;
+
+  image(sun, x,y, 70,70);
+pop();
+  
+   
 }
+
+  
+
+
+
